@@ -5,6 +5,7 @@
 #import "NSObject+CBMJExtension.h"
 #import "UIImageView+SDWeb.h"
 #import "UIView+Extension.h"
+#import "ArkBMKManager.h"
 // 适配iphone6 所以用的它的分辨率 -- 因为标注都是按这个来的
 // 公式：x = y * k；   ----> 坐标值 = 标尺 * 比率
 #define widthRate ScreenW/750
@@ -66,6 +67,17 @@
 #define ScreenH [UIScreen mainScreen].bounds.size.height
 #define kNotificationCenter [NSNotificationCenter defaultCenter]
 #define kUserDefaults [NSUserDefaults standardUserDefaults]
+
+
+//状态栏高度
+#define KStatuesBarHeight  ([UIApplication sharedApplication].statusBarFrame.size.height)
+
+//导航栏高度
+#define KNavigationBarHeight 44.0
+//导航栏高度+状态栏高度
+#define kViewTopHeight (KStatuesBarHeight + KNavigationBarHeight)
+//iphoneX适配差值
+#define KiPhoneXSafeAreaDValue ([[UIApplication sharedApplication] statusBarFrame].size.height>20?34:0)
 
 #define kVideoNameFile [ NSTemporaryDirectory() stringByAppendingString:@"videoNameFile_"];
 // View 坐标(x,y)和宽高(width,height)
