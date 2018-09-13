@@ -7,6 +7,28 @@
 
 #import "AFNTool.h"
 
+@implementation RequestDataModel
+
+static NSString * const ANApiKey = @"0bfe50a0bb70414eb48f4a38ee566304";
+static NSString * const ANApiusername=@"HE1809111706021595";
+
++ (instancetype)reqParamLoction:(NSString *)city
+{
+    RequestDataModel * model=[[self alloc] init];
+    model.username=ANApiusername;
+    model.key=ANApiKey;
+    NSDate *currentDate = [NSDate date];//获取当前时间，日期
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];// 创建一个时间格式化对象
+    [dateFormatter setDateFormat:@"YYYY/MM/dd hh:mm:ss"];//设定时间格式,这里可以设置成自己需要的格式
+    NSString *dateString = [dateFormatter stringFromDate:currentDate];//将时间转化成字符串
+    model.t=dateString;
+    model.location=city;
+    model.sign=[AFNTool getSignKeyWithDict:model.CBMJExtensionkeyValues];
+    return model;
+}
+
+@end
+
 @implementation AFNTool
 
 
@@ -92,6 +114,80 @@
             [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
         }
     }];
+    
+}
+
++(void)reqGetWithURl:(NSString *)url
+          parameters:(RequestDataModel *)model
+             success:(void (^)(id responseObject))success
+             failure:(void (^)(NSError *error))failure
+{
+    AFHTTPSessionManager *manager = [AFNTool manager];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [UIApplication sharedApplication].networkActivityIndicatorVisible=YES;
+    });
+    [manager GET:url parameters:model.CBMJExtensionkeyValues progress:^(NSProgress * _Nonnull uploadProgress) {
+        
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        if (success) {
+            success(responseObject);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+            });
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        if (failure) {
+            failure(error);
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [UIApplication sharedApplication].networkActivityIndicatorVisible=NO;
+            });
+            
+        }
+    }];
+    
+}
+
++ (NSString *)getSignKeyWithDict:(NSDictionary *)dict
+{
+    //把签名文件先清除
+    NSMutableDictionary *mDic=[NSMutableDictionary dictionaryWithDictionary:dict];
+    if (mDic[@"sign"]) {
+        mDic[@"sign"]=nil;
+    }
+    DLog(@"%@",mDic);
+    
+    // 构造最后的签名
+    NSArray *array = [mDic allKeys];
+    NSMutableArray *copyArray = [NSMutableArray new];
+    
+    // 剔除值为空的键 这一步就包括了sign
+    for (NSString *string in array) {
+        
+        NSString *str=[NSString stringWithFormat:@"%@",mDic[string]];
+        
+        if ([str isEqualToString:@""] || str == nil) {
+            continue;
+        }
+        [copyArray addObject:string];
+    }
+    
+    // 将获得的数组按照字母顺序进行排序
+    [copyArray sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    NSMutableArray *section = [NSMutableArray new];
+    for (NSString *key in copyArray) {
+        NSString *sec = [NSString stringWithFormat:@"%@=%@", key, mDic[key]];
+        [section addObject:sec];
+    }
+    NSString *joindString = [section componentsJoinedByString:@"&"];
+    
+    // totalString
+    NSString *finalString = [NSString stringWithFormat:@"%@", joindString];
+    NSString *ret = [finalString MD5];
+    
+    return ret;
     
 }
 

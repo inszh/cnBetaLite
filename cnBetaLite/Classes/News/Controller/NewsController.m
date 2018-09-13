@@ -26,12 +26,15 @@
     [super viewDidLoad];
     
     UIWebView *webView = [[UIWebView alloc] initWithFrame:self.view.bounds];
+    webView.height+=50;
     webView.backgroundColor = [UIColor whiteColor];
     self.view.backgroundColor=[UIColor whiteColor];
     for (UIView *bg in webView.subviews) {
         bg.backgroundColor=[UIColor whiteColor];
     }
-    webView.scrollView.contentInset=UIEdgeInsetsMake(0, 0, 35, 0);
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        webView.scrollView.contentInset=UIEdgeInsetsMake(0, 0, 85, 0);
+    });
     [self.view addSubview:webView];
     webView.delegate = self;
     self.webView=webView;

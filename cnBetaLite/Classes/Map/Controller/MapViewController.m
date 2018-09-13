@@ -10,6 +10,8 @@
 #import "ArkBMKAnnotationView.h"
 #import "ArknowM.h"
 #import "ArkBMKAnnotation.h"
+#import "ArkReqTool.h"
+
 @interface MapViewController ()<BMKMapViewDelegate>
 
 @property (nonatomic, strong) BMKMapView *mapView; //当前界面的mapView
@@ -21,8 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self configUI];
-    [self createMapView];
-    [self createAnnotation];
+    [self reqData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -35,6 +36,22 @@
     [_mapView viewWillDisappear];
 }
 
+-(void)reqData
+{
+    WeakSelf;
+    
+    [ArkReqTool reqWeatherData:@"北京" success:^(ArknowM *nowm) {
+        
+        weakSelf.nowm=nowm;
+        
+        [self createMapView];
+
+        [self createAnnotation];
+
+    } failure:^{}];
+
+}
+
 #pragma mark - Config UI
 - (void)configUI {
     self.navigationController.navigationBar.translucent = NO;
@@ -43,13 +60,13 @@
     self.title = @"pm2.5";
     
     
-    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] style:(UIBarButtonItemStylePlain) target:self action:@selector(dismiss)];
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"back"] imageWithRenderingMode:(UIImageRenderingModeAlwaysOriginal)] style:(UIBarButtonItemStylePlain) target:self action:@selector(pop)];
     self.navigationItem.leftBarButtonItem = backButton;
 
 }
-- (void)dismiss
+- (void)pop
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 
@@ -72,7 +89,7 @@
 - (void)createAnnotation {
     
     for (NSDictionary *dict in self.nowm.air_now_station) {
-        ArknowM *nowm=[ArknowM objectWithKeyValues:dict];
+        ArknowM *nowm=[ArknowM CBMJExtensionobjectWithKeyValues:dict];
         ArkBMKAnnotation *annotation=[ArkBMKAnnotation new];
         CLLocationDegrees la=nowm.lat.doubleValue;
         CLLocationDegrees lo=nowm.lon.doubleValue;

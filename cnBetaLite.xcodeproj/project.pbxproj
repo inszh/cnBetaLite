@@ -101,6 +101,9 @@
 		498EEBFE21435E81008B42B0 /* CommentM.m in Sources */ = {isa = PBXBuildFile; fileRef = 498EEBFD21435E81008B42B0 /* CommentM.m */; };
 		499BB604214387B900B585AE /* cnbetaph@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 499BB603214387B900B585AE /* cnbetaph@2x.png */; };
 		499BB60621438D5000B585AE /* LaunchScreen@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 499BB60521438D5000B585AE /* LaunchScreen@2x.png */; };
+		49CA5AAB214A47D7002888C4 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CA5AAA214A47D7002888C4 /* back@2x.png */; };
+		49CA5AAE214A480E002888C4 /* ArkReqTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 49CA5AAC214A480D002888C4 /* ArkReqTool.m */; };
+		49CA5AB0214A4BCF002888C4 /* pm2.5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 49CA5AAF214A4BCF002888C4 /* pm2.5@2x.png */; };
 		49D44B252148DA6D00B74D86 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D44B1A2148DA6D00B74D86 /* MapViewController.m */; };
 		49D44B262148DA6D00B74D86 /* ArkBMKAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D44B1D2148DA6D00B74D86 /* ArkBMKAnnotation.m */; };
 		49D44B272148DA6D00B74D86 /* ArkBMKAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49D44B202148DA6D00B74D86 /* ArkBMKAnnotationView.m */; };
@@ -330,6 +333,10 @@
 		498EEBFD21435E81008B42B0 /* CommentM.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentM.m; sourceTree = "<group>"; };
 		499BB603214387B900B585AE /* cnbetaph@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cnbetaph@2x.png"; sourceTree = "<group>"; };
 		499BB60521438D5000B585AE /* LaunchScreen@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LaunchScreen@2x.png"; sourceTree = "<group>"; };
+		49CA5AAA214A47D7002888C4 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		49CA5AAC214A480D002888C4 /* ArkReqTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArkReqTool.m; sourceTree = "<group>"; };
+		49CA5AAD214A480D002888C4 /* ArkReqTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArkReqTool.h; sourceTree = "<group>"; };
+		49CA5AAF214A4BCF002888C4 /* pm2.5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pm2.5@2x.png"; sourceTree = "<group>"; };
 		49D44B1A2148DA6D00B74D86 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		49D44B1B2148DA6D00B74D86 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		49D44B1D2148DA6D00B74D86 /* ArkBMKAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArkBMKAnnotation.m; sourceTree = "<group>"; };
@@ -472,6 +479,8 @@
 		498EE797214256F2008B42B0 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				49CA5AAF214A4BCF002888C4 /* pm2.5@2x.png */,
+				49CA5AAA214A47D7002888C4 /* back@2x.png */,
 				499BB60521438D5000B585AE /* LaunchScreen@2x.png */,
 				499BB603214387B900B585AE /* cnbetaph@2x.png */,
 				498EEBF021435A25008B42B0 /* commentBtn@2x.png */,
@@ -886,8 +895,8 @@
 		49D44B192148DA6D00B74D86 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				49D44B1A2148DA6D00B74D86 /* MapViewController.m */,
 				49D44B1B2148DA6D00B74D86 /* MapViewController.h */,
+				49D44B1A2148DA6D00B74D86 /* MapViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -906,8 +915,8 @@
 		49D44B1F2148DA6D00B74D86 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				49D44B202148DA6D00B74D86 /* ArkBMKAnnotationView.m */,
 				49D44B212148DA6D00B74D86 /* ArkBMKAnnotationView.h */,
+				49D44B202148DA6D00B74D86 /* ArkBMKAnnotationView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -915,6 +924,8 @@
 		49D44B222148DA6D00B74D86 /* BMKTool */ = {
 			isa = PBXGroup;
 			children = (
+				49CA5AAD214A480D002888C4 /* ArkReqTool.h */,
+				49CA5AAC214A480D002888C4 /* ArkReqTool.m */,
 				49D44B232148DA6D00B74D86 /* ArkBMKManager.h */,
 				49D44B242148DA6D00B74D86 /* ArkBMKManager.m */,
 			);
@@ -1069,7 +1080,9 @@
 				498EE89B21425924008B42B0 /* LICENSE in Resources */,
 				499BB60621438D5000B585AE /* LaunchScreen@2x.png in Resources */,
 				499BB604214387B900B585AE /* cnbetaph@2x.png in Resources */,
+				49CA5AAB214A47D7002888C4 /* back@2x.png in Resources */,
 				498EE7702142561D008B42B0 /* LaunchScreen.storyboard in Resources */,
+				49CA5AB0214A4BCF002888C4 /* pm2.5@2x.png in Resources */,
 				498EEBFA21435E5D008B42B0 /* CommentViewCell.xib in Resources */,
 				498EE8C421425964008B42B0 /* LICENSE in Resources */,
 				49D44B532148DC2600B74D86 /* mapapi.bundle in Resources */,
@@ -1180,6 +1193,7 @@
 				498EE89821425924008B42B0 /* NSString+MJExtension.m in Sources */,
 				498EE89221425924008B42B0 /* NSObject+MJKeyValue.m in Sources */,
 				498EE85221425894008B42B0 /* MJRefreshBackStateFooter.m in Sources */,
+				49CA5AAE214A480E002888C4 /* ArkReqTool.m in Sources */,
 				498EE89521425924008B42B0 /* MJExtensionConst.m in Sources */,
 				498EE8C721425964008B42B0 /* UIRefreshControl+AFNetworking.m in Sources */,
 				498EE8D321425964008B42B0 /* AFNetworkReachabilityManager.m in Sources */,

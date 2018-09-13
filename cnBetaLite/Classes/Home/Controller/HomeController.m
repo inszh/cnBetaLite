@@ -9,6 +9,7 @@
 #import "HomeController.h"
 #import "HomeDataM.h"
 #import "HomeCell.h"
+#import "MapViewController.h"
 
 #import "NewsController.h"
 @interface HomeController ()<UITableViewDelegate,UITableViewDataSource>
@@ -41,6 +42,10 @@
     
     self.homeView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
     self.homeView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadDataMore)];
+    
+    UIBarButtonItem *mapButton = [[UIBarButtonItem alloc] initWithTitle:@"PM2.5" style:UIBarButtonItemStyleDone target:self action:@selector(map)];
+    self.navigationItem.rightBarButtonItem = mapButton;
+    
     
 }
 - (void)reSetUI
@@ -125,6 +130,11 @@
     return _news;
 }
 
+- (void)map
+{
+    MapViewController *map=[MapViewController new];
+    [self.navigationController pushViewController:map animated:YES];
+}
 
 
 
