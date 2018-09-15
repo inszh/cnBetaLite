@@ -7,7 +7,10 @@
 //
 
 #import "AppDelegate.h"
-
+#import "HomeController.h"
+#import "RightViewController.h"
+#import "XLSlideMenu.h"
+#import "CBNavController.h"
 @interface AppDelegate ()
 
 @end
@@ -18,6 +21,20 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[ArkBMKManager manager] setupBMK];
+    
+    //主界面
+    HomeController *vc = [[HomeController alloc] init];
+    //配置NavigationBar
+    CBNavController *rootNav = [[CBNavController alloc] initWithRootViewController:vc];
+    //右侧菜单
+    RightViewController *rightVC = [[RightViewController alloc] init];
+    //创建滑动菜单
+    XLSlideMenu *slideMenu = [[XLSlideMenu alloc] initWithRootViewController:rootNav];
+    //设置左右菜单
+    slideMenu.rightViewController = rightVC;
+    
+    self.window.rootViewController = slideMenu;
+
     return YES;
 }
 

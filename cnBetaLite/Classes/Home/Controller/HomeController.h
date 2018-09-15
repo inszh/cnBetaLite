@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface HomeController : UIViewController
+-(void)loadTop10;
+-(void)loadData;
 
 @end

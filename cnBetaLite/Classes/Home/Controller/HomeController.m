@@ -40,14 +40,26 @@
     homeView.estimatedRowHeight=0;
     [self.view addSubview:homeView];
     
+    self.title=@"cnBetaLite";
+    
     self.homeView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadData)];
     self.homeView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingTarget:self refreshingAction:@selector(loadDataMore)];
+
     
-    UIBarButtonItem *mapButton = [[UIBarButtonItem alloc] initWithTitle:@"PM2.5" style:UIBarButtonItemStyleDone target:self action:@selector(map)];
-    self.navigationItem.rightBarButtonItem = mapButton;
+    
+    UIButton *moreButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [moreButton setImage:[UIImage imageNamed:@"more"] forState:UIControlStateNormal];
+    [moreButton addTarget:self action:@selector(showRight) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:moreButton];
+    
+    UIButton *pmButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [pmButton setImage:[UIImage imageNamed:@"pm2.5btn"] forState:UIControlStateNormal];
+    [pmButton addTarget:self action:@selector(map) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:pmButton];
     
     
 }
+
 - (void)reSetUI
 {
     [MBProgressHUD hideHUDForView:self.view animated:NO];
@@ -133,10 +145,32 @@
 - (void)map
 {
     MapViewController *map=[MapViewController new];
-    [self.navigationController pushViewController:map animated:YES];
+    UINavigationController *nav=[[UINavigationController alloc] initWithRootViewController:map];
+    [self presentViewController:nav animated:YES completion:nil];
+}
+
+-(void)showRight{
+    [self.xl_sldeMenu showRightViewControllerAnimated:true];
 }
 
 
+-(void)loadTop10
+{
+    
+    WeakSelf
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSDate *date=[NSDate date];
+    NSString *dateStr=[NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]];
+    NSString *sign =[[NSString stringWithFormat: @"app_key=10000&format=json&method=Article.Top10&timestamp=%@&v=1.0&mpuffgvbvbttn3Rc",dateStr] MD5];
+    NSString *strUrl =[NSString stringWithFormat: @"http://api.cnbeta.com/capi?app_key=10000&format=json&method=Article.Top10&timestamp=%@&v=1.0&sign=%@",dateStr,sign];
+    [AFNTool getWithURl:strUrl parameters:nil success:^(id responseObject) {
+        weakSelf.news=nil;
+        self.news=[HomeDataM CBMJExtensionobjectArrayWithKeyValuesArray :responseObject[@"result"]];
+        [weakSelf reSetUI];
+    } failure:^(NSError *error) {
+        
+    }];
+}
 
 
 @end

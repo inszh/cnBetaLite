@@ -6,6 +6,8 @@
 #import "UIImageView+SDWeb.h"
 #import "UIView+Extension.h"
 #import "ArkBMKManager.h"
+#import "XLSlideMenu.h"
+
 // 适配iphone6 所以用的它的分辨率 -- 因为标注都是按这个来的
 // 公式：x = y * k；   ----> 坐标值 = 标尺 * 比率
 #define widthRate ScreenW/750

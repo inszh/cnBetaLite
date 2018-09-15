@@ -66,8 +66,8 @@
 }
 - (void)pop
 {
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 - (void)createMapView {
