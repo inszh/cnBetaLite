@@ -11,5 +11,6 @@
 @interface HomeController : UIViewController
 -(void)loadTop10;
 -(void)loadData;
+- (void)hotType:(int)type;
 
 @end

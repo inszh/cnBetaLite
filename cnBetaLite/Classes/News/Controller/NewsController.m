@@ -9,6 +9,7 @@
 #import "NewsController.h"
 #import "HomeDataM.h"
 #import "CommentListController.h"
+//#import <UShareUI/UShareUI.h>
 
 @interface NewsController ()<UIWebViewDelegate>
 @property (nonatomic , strong ) UIWebView *webView;
@@ -89,28 +90,6 @@
 }
 
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//    [super viewWillAppear:animated];
-//    self.navigationController.navigationBarHidden = YES;
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated
-//{
-//    [super viewWillDisappear:animated];
-//    self.navigationController.navigationBarHidden = NO;
-//}
-
-//- (UIView*)statusBarBiew
-//{
-//    if (!_statusBarBiew) {
-//        _statusBarBiew=[UIView new];
-//        _statusBarBiew.backgroundColor=[UIColor whiteColor];
-//        _statusBarBiew.frame=CGRectMake(0, 0, ScreenW, 64);
-//        [self.view addSubview:_statusBarBiew];
-//    }
-//    return _statusBarBiew;
-//}
 
 - (UIButton*)commentBtn
 {
@@ -131,36 +110,44 @@
     [self.navigationController pushViewController:list animated:YES];
 }
 
-//- (UILabel*)titleL
-//{
-//    if (!_titleL) {
-//        _titleL=[UILabel new];
-//        _titleL.textColor=[UIColor blackColor];
-//        _titleL.font=[UIFont systemFontOfSize:20];
-//        _titleL.text=self.homeM.title;
-//        CGFloat w = [self.homeM.title boundingRectWithSize:CGSizeMake(MAXFLOAT, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:_titleL.font} context:nil].size.width;
-//        _titleL.frame=CGRectMake(0, 64, w, 44);
-//        _titleL.textAlignment=1;
-//        _titleL.backgroundColor=[UIColor whiteColor];
-//        [self.view addSubview:_titleL];
-//        [self startToAnimate];
-//    }
-//    return _titleL;
+//    //显示分享面板
+//    [UMSocialUIManager showShareMenuViewInWindowWithPlatformSelectionBlock:^(UMSocialPlatformType platformType, NSDictionary *userInfo) {
+//        // 根据获取的platformType确定所选平台进行下一步操作
 //
-//}
+//        [self shareWebPageToPlatformType:platformType];
+//    }];
 
-//- (void)startToAnimate{
+//- (void)shareWebPageToPlatformType:(UMSocialPlatformType)platformType
+//{
+//    //创建分享消息对象
+//    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
 //
-//    CGFloat speed = 45.0;
-//    CABasicAnimation * animate = [CABasicAnimation animation];
-//    animate.fromValue = @( _titleL.frame.size.width+20);
-//    animate.toValue=@( -_titleL.frame.size.width+20);
-//    animate.keyPath = @"transform.translation.x";
-//    animate.duration = (_titleL.frame.size.width + 20) / speed;
-//    animate.removedOnCompletion = YES;
-//    animate.repeatCount = MAXFLOAT;
-//    [_titleL.layer addAnimation:animate forKey:@"containerView animation"];
+//    //创建网页内容对象
+//    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+//    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
+//    //设置网页地址
+//    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
 //
+//    //分享消息对象设置分享内容对象
+//    messageObject.shareObject = shareObject;
+//
+//    //调用分享接口
+//    [[UMSocialManager defaultManager] shareToPlatform:platformType messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+//        if (error) {
+//            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+//        }else{
+//            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+//                UMSocialShareResponse *resp = data;
+//                //分享结果消息
+//                UMSocialLogInfo(@"response message is %@",resp.message);
+//                //第三方原始返回的数据
+//                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+//
+//            }else{
+//                UMSocialLogInfo(@"response data is %@",data);
+//            }
+//        }
+//    }];
 //}
 
 @end

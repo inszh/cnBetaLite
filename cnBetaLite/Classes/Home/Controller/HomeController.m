@@ -70,19 +70,7 @@
 
 -(void)loadData
 {
-    WeakSelf
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    NSDate *date=[NSDate date];
-    NSString *dateStr=[NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]];
-    NSString *sign =[[NSString stringWithFormat: @"app_key=10000&format=json&method=Article.Lists&timestamp=%@&v=1.0&mpuffgvbvbttn3Rc",dateStr] MD5];
-    NSString *strUrl =[NSString stringWithFormat: @"http://api.cnbeta.com/capi?app_key=10000&format=json&method=Article.Lists&timestamp=%@&v=1.0&sign=%@",dateStr,sign];
-    [AFNTool getWithURl:strUrl parameters:nil success:^(id responseObject) {
-        weakSelf.news=nil;
-        self.news=[HomeDataM CBMJExtensionobjectArrayWithKeyValuesArray :responseObject[@"result"]];
-        [weakSelf reSetUI];
-    } failure:^(NSError *error) {
-        
-    }];
+    [self loadMethod:@"Article.Lists"];
 }
 
 -(void)loadDataMore
@@ -131,6 +119,7 @@
     NewsController *content=[[NewsController alloc]init];
     content.homeM=self.news[indexPath.row];
     [self.navigationController pushViewController:content animated:YES];
+    
 }
 
 -(NSMutableArray *)news
@@ -153,16 +142,53 @@
     [self.xl_sldeMenu showRightViewControllerAnimated:true];
 }
 
+- (void)loadMethod:(NSString *)method
+{
+    WeakSelf
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    NSDate *date=[NSDate date];
+    NSString *dateStr=[NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]];
+    NSString *sign =[[NSString stringWithFormat: @"app_key=10000&format=json&method=%@&timestamp=%@&v=1.0&mpuffgvbvbttn3Rc",method,dateStr] MD5];
+    NSString *strUrl =[NSString stringWithFormat: @"http://api.cnbeta.com/capi?app_key=10000&format=json&method=%@&timestamp=%@&v=1.0&sign=%@",method,dateStr,sign];
+    [AFNTool getWithURl:strUrl parameters:nil success:^(id responseObject) {
+        weakSelf.news=nil;
+        self.news=[HomeDataM CBMJExtensionobjectArrayWithKeyValuesArray :responseObject[@"result"]];
+        [weakSelf reSetUI];
+    } failure:^(NSError *error) {
+        
+    }];
+    
+}
+
 
 -(void)loadTop10
 {
+//    [self loadMethod:@"Article.Top10"];
+    
+    [self hotType:2];
+}
+
+- (void)hotType:(int)type
+{
+    NSString *typeStr;
+    switch (type) {
+        case 1:
+            typeStr=@"comments";
+            break;
+        case 2:
+            typeStr=@"counter";
+            break;
+        case 3:
+            typeStr=@"dig";
+            break;
+    }
     
     WeakSelf
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     NSDate *date=[NSDate date];
     NSString *dateStr=[NSString stringWithFormat:@"%ld", (long)[date timeIntervalSince1970]];
-    NSString *sign =[[NSString stringWithFormat: @"app_key=10000&format=json&method=Article.Top10&timestamp=%@&v=1.0&mpuffgvbvbttn3Rc",dateStr] MD5];
-    NSString *strUrl =[NSString stringWithFormat: @"http://api.cnbeta.com/capi?app_key=10000&format=json&method=Article.Top10&timestamp=%@&v=1.0&sign=%@",dateStr,sign];
+    NSString *sign =[[NSString stringWithFormat: @"app_key=10000&format=json&method=Article.TodayRank&timestamp=%@&type=%@&v=1.0&mpuffgvbvbttn3Rc",dateStr,typeStr] MD5];
+    NSString *strUrl =[NSString stringWithFormat: @"http://api.cnbeta.com/capi?app_key=10000&format=json&method=Article.TodayRank&timestamp=%@&type=%@&v=1.0&sign=%@",dateStr,typeStr,sign];
     [AFNTool getWithURl:strUrl parameters:nil success:^(id responseObject) {
         weakSelf.news=nil;
         self.news=[HomeDataM CBMJExtensionobjectArrayWithKeyValuesArray :responseObject[@"result"]];
@@ -171,6 +197,9 @@
         
     }];
 }
+
+
+
 
 
 @end

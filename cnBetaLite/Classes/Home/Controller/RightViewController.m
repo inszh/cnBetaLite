@@ -12,8 +12,10 @@
 #import "HomeController.h"
 #import "CBNavController.h"
 @interface RightViewController ()<UITableViewDelegate,UITableViewDataSource> {
-    UITableView *_tableView;;
+    UITableView *_tableView;
 }
+@property(nonatomic,strong)HomeController *home;
+
 @end
 
 @implementation RightViewController
@@ -66,43 +68,65 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    WeakSelf
+    CBNavController *nav=(CBNavController *)self.xl_sldeMenu.rootViewController;
+    [nav.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj isKindOfClass:[HomeController class]]) {
+            weakSelf.home=obj;
+            *stop=YES;
+        }
+    } ];
+    
     switch (indexPath.row) {
+
         case 0:
         {
-            CBNavController *nav=(CBNavController *)self.xl_sldeMenu.rootViewController;
-            [nav.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([obj isKindOfClass:[HomeController class]]) {
-                    HomeController *home=obj;
-                    home.title=@"TOP10";
-                    [home loadTop10];
-                    *stop=YES;;
-                }
-            } ];
-            
+            weakSelf.home.title=@"cnBetaLite";
+            [weakSelf.home loadData];
             [self.xl_sldeMenu showRootViewControllerAnimated:true];
+
             break;
         }
         case 1:
         {
-            CBNavController *nav=(CBNavController *)self.xl_sldeMenu.rootViewController;
-            [nav.childViewControllers enumerateObjectsUsingBlock:^(__kindof UIViewController * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                if ([obj isKindOfClass:[HomeController class]]) {
-                    HomeController *home=obj;
-                    home.title=@"cnBetaLite";
-                    [home loadData];
-                    *stop=YES;;
-                }
-            } ];
+            weakSelf.home.title=@"TOP10";
+            [weakSelf.home loadTop10];
             [self.xl_sldeMenu showRootViewControllerAnimated:true];
+
             break;
         }
         case 2:
+        {
+            weakSelf.home.title=@"最热评论";
+            [weakSelf.home hotType:1];
+            [self.xl_sldeMenu showRootViewControllerAnimated:true];
+
+            break;
+        }
+        case 3:
+        {
+            weakSelf.home.title=@"点赞最高";
+            [weakSelf.home hotType:2];
+            [self.xl_sldeMenu showRootViewControllerAnimated:true];
+
+            break;
+        }
+        case 4:
+        {
+            weakSelf.home.title=@"特别推荐";
+            [weakSelf.home hotType:3];
+            [self.xl_sldeMenu showRootViewControllerAnimated:true];
+
+            break;
+        }
+            
+        case 5:
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [MBProgressHUD  showSuccess:@"清理成功"];
             });
             [self.xl_sldeMenu showRightViewControllerAnimated:true];
             break;
-        case 3: {
+        case 6: {
             
             NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/id1088526122"];
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
@@ -118,11 +142,11 @@
 #pragma mark -
 #pragma mark TableViewDelegate&DataSource
 - (NSArray *)titles {
-    return @[@"top10",@"最新",@"清空缓存",@"给我打分",@"版本信息:1.0"];
+    return @[@"最新",@"本月top10",@"最热评论",@"点赞最高",@"特别推荐",@"清空缓存",@"给我打分",@"版本信息:1.0"];
 }
 
 - (NSArray *)images {
-    return @[@"top10",@"new",@"cache",@"score",@"version"];
+    return @[@"new",@"top10",@"hot",@"counter",@"dig",@"cache",@"score",@"version"];
 }
 
 
