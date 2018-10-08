@@ -43,7 +43,6 @@
 		4922EF08214BB90000DF6B5C /* MJPropertyKey.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922EE65214BB90000DF6B5C /* MJPropertyKey.m */; };
 		4922EF09214BB90000DF6B5C /* MJFoundation.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922EE69214BB90000DF6B5C /* MJFoundation.m */; };
 		4922EF0A214BB90000DF6B5C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4922EE6A214BB90000DF6B5C /* LICENSE */; };
-		4922EF0B214BB90000DF6B5C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4922EE6B214BB90000DF6B5C /* README.md */; };
 		4922EF0C214BB90000DF6B5C /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922EE6D214BB90000DF6B5C /* UIScrollView+MJRefresh.m */; };
 		4922EF0D214BB90000DF6B5C /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922EE6E214BB90000DF6B5C /* MJRefreshConst.m */; };
 		4922EF0E214BB90000DF6B5C /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4922EE71214BB90000DF6B5C /* MJRefresh.bundle */; };
@@ -73,7 +72,6 @@
 		4922EF26214BB90000DF6B5C /* BaiduMapAPI_Base.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4922EEA5214BB90000DF6B5C /* BaiduMapAPI_Base.framework */; };
 		4922EF27214BB90000DF6B5C /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4922EEA6214BB90000DF6B5C /* BaiduMapAPI_Search.framework */; };
 		4922EF28214BB90000DF6B5C /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4922EEA7214BB90000DF6B5C /* BaiduMapAPI_Cloud.framework */; };
-		4922EF29214BB90000DF6B5C /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4922EEA9214BB90000DF6B5C /* LICENSE */; };
 		4922EF2A214BB90000DF6B5C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4922EEAA214BB90000DF6B5C /* README.md */; };
 		4922EF2B214BB90000DF6B5C /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922EEAC214BB90000DF6B5C /* UIProgressView+AFNetworking.m */; };
 		4922EF2C214BB90000DF6B5C /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4922EEAE214BB90000DF6B5C /* UIRefreshControl+AFNetworking.m */; };
@@ -1309,13 +1307,11 @@
 				49071F97214CAFBD0070FD97 /* dig@2x.png in Resources */,
 				49CA5AB0214A4BCF002888C4 /* pm2.5@2x.png in Resources */,
 				4922EF0A214BB90000DF6B5C /* LICENSE in Resources */,
-				4922EF0B214BB90000DF6B5C /* README.md in Resources */,
 				4922EF4F214BBAA300DF6B5C /* more@2x.png in Resources */,
 				49071F96214CAFBD0070FD97 /* counter@2x.png in Resources */,
 				4922EF0E214BB90000DF6B5C /* MJRefresh.bundle in Resources */,
 				498EEBFA21435E5D008B42B0 /* CommentViewCell.xib in Resources */,
 				498EE8ED2142605F008B42B0 /* HomeCell.xib in Resources */,
-				4922EF29214BB90000DF6B5C /* LICENSE in Resources */,
 				498EE76D2142561D008B42B0 /* Assets.xcassets in Resources */,
 				49071F8F214CAEC60070FD97 /* hot@2x.png in Resources */,
 				49071FBE214CB30A0070FD97 /* UMSocialSDKResources.bundle in Resources */,

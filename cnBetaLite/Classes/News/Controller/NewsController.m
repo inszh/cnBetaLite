@@ -34,7 +34,7 @@
         bg.backgroundColor=[UIColor whiteColor];
     }
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        webView.scrollView.contentInset=UIEdgeInsetsMake(64, 0, 85, 0);
+        webView.scrollView.contentInset=UIEdgeInsetsMake(0, 0, 85, 0);
     });
     [self.view addSubview:webView];
     webView.delegate = self;
